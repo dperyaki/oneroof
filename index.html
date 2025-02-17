@@ -1,4 +1,3 @@
-html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,10 +36,6 @@ html
             height: auto; /* Высота автоматически подстраивается */
             transition: transform 0.5s ease; /* Плавный переход для смены изображений */
         }
-        @keyframes slide {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
-        }
     </style>
 </head>
 <body>
@@ -54,7 +49,6 @@ html
         <img src="https://drive.google.com/uc?export=view&id=1PTGruKcdCIZuz2HbybgT6bW8bL_XACg_" alt="Изображение 1" />
         <img src="https://drive.google.com/uc?export=view&id=1PTGruKcdCIZuz2HbybgT6bW8bL_XACg_" alt="Изображение 2" />
         <img src="https://drive.google.com/uc?export=view&id=1PTGruKcdCIZuz2HbybgT6bW8bL_XACg_" alt="Изображение 3" />
-        <!-- Добавляйте больше изображений по мере необходимости -->
     </div>
     <script>
         let currentIndex = 0;
@@ -69,4 +63,3 @@ html
         setInterval(showNextImage, 5000); // Меняем изображение каждые 5 секунд
     </script>
 </body>
-</html>
