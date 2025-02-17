@@ -1,3 +1,4 @@
+html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,15 +11,35 @@
             background-color: #f0f0f0;
             color: #333;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            overflow: hidden; /* Отключает прокрутку страницы */
         }
         h1 {
             color: #007BFF;
+            text-align: center;
+        }
+        nav {
+            text-align: center;
+            margin-bottom: 20px;
         }
         nav a {
             margin: 0 10px;
             text-decoration: none;
             color: #007BFF;
+        }
+        .image-slider {
+            display: flex;
+            overflow: hidden;
+            height: 100vh; /* Высота вьюпорта */
+        }
+        .image-slider img {
+            min-width: 100%; /* Изображение занимает всю ширину */
+            height: auto; /* Высота автоматически подстраивается */
+            transition: transform 0.5s ease; /* Плавный переход для смены изображений */
+        }
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
         }
     </style>
 </head>
@@ -29,6 +50,23 @@
         <a href="contact.html">Контакты</a>
     </nav>
     <h1>Добро пожаловать на мой сайт</h1>
-    <p>Это главная страница моего многостраничного сайта.</p>
+    <div class="image-slider">
+        <img src="URL_ВАШЕГО_ПЕРВОГО_ИЗОБРАЖЕНИЯ" alt="Изображение 1" />
+        <img src="URL_ВАШЕГО_ВТОРОГО_ИЗОБРАЖЕНИЯ" alt="Изображение 2" />
+        <img src="URL_ВАШЕГО_ТРЕТЬЕГО_ИЗОБРАЖЕНИЯ" alt="Изображение 3" />
+        <!-- Добавляйте больше изображений по мере необходимости -->
+    </div>
+    <script>
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.image-slider img');
+    
+        function showNextImage() {
+            images[currentIndex].style.transform = 'translateX(-100%)'; // Скрываем текущее изображение
+            currentIndex = (currentIndex + 1) % images.length; // Переходим к следующему индексу
+            images[currentIndex].style.transform = 'translateX(0)'; // Показываем следующее изображение
+        }
+
+        setInterval(showNextImage, 5000); // Меняем изображение каждые 5 секунд
+    </script>
 </body>
 </html>
