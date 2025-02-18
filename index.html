@@ -8,7 +8,7 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
-            color: red; /* Изменён цвет текста на красный */
+            color: red; /* Цвет текста на красный */
             margin: 0;
             padding: 0;
             overflow: hidden; /* Отключает прокрутку страницы */
@@ -23,15 +23,22 @@
             color: red; /* Цвет ссылок на красный */
         }
         .image-slider {
-            display: flex;
-            overflow: hidden;
+            position: relative;
             height: 100vh; /* Высота вьюпорта */
+            overflow: hidden; /* Отключает прокрутку внутри слайдера */
         }
         .image-slider img {
-            min-width: 100%; /* Изображение занимает всю ширину */
+            position: absolute; /* Изменён стиль на absolute для каждого изображения */
+            top: 0;
+            left: 0;
+            width: 100%; /* Изображение занимает всю ширину */
             height: 100%; /* Высота изображения 100% высоты вьюпорта */
             object-fit: contain; /* Подгонка изображения без искажений */
-            transition: transform 1s ease; /* Плавный переход для смены изображений */
+            opacity: 0; /* Начальный уровень непрозрачности 0 */
+            transition: opacity 1s ease; /* Плавный переход для смены изображений */
+        }
+        .image-slider img.active {
+            opacity: 1; /* Полная видимость для активного изображения */
         }
     </style>
 </head>
@@ -42,7 +49,7 @@
         <a href="contact.html">Контакты</a>
     </nav>
     <div class="image-slider">
-        <img src="https://www.dropbox.com/scl/fi/jg2cidbu4lr18cn6qc6yl/groupBox1_image.jpeg?rlkey=8r49w3kdkv3zq9dyrddvyd3am&raw=1" alt="Изображение 1" />
+        <img src="https://www.dropbox.com/scl/fi/jg2cidbu4lr18cn6qc6yl/groupBox1_image.jpeg?rlkey=8r49w3kdkv3zq9dyrddvyd3am&raw=1" alt="Изображение 1" class="active" />
         <img src="https://www.dropbox.com/scl/fi/ru2h7o32bho1heqgc9my4/chart2_image.jpeg?rlkey=mq5nwpr21ve4yo9bhmy0450bo&raw=1" alt="Изображение 2" />
         <img src="https://www.dropbox.com/scl/fi/cwyqlr5gbfp9jxwmmrm9r/chart1_image.jpeg?rlkey=nukm100uizj4vx5jwtp8dm9wl&raw=1" alt="Изображение 3" />
         <!-- Добавляйте больше изображений по мере необходимости -->
@@ -52,15 +59,9 @@
         const images = document.querySelectorAll('.image-slider img');
     
         function showNextImage() {
-            images[currentIndex].style.transform = 'translateX(-100%)'; // Скрываем текущее изображение
+            images[currentIndex].classList.remove('active'); // Убираем активный класс у текущего изображения
             currentIndex = (currentIndex + 1) % images.length; // Переходим к следующему индексу
-            images[currentIndex].style.transform = 'translateX(0)'; // Показываем следующее изображение
-        }
-
-        // Инициализируем первый элемент с нулевым смещением
-        images[0].style.transform = 'translateX(0)';
-        for(let i = 1; i < images.length; i++) {
-            images[i].style.transform = 'translateX(100%)'; // Выносим все остальные изображения вправо
+            images[currentIndex].classList.add('active'); // Добавляем активный класс к следующему изображению
         }
 
         setInterval(showNextImage, 5000); // Меняем изображение каждые 5 секунд
