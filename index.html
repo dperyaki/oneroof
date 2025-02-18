@@ -33,12 +33,9 @@
         }
         .image-slider img {
             min-width: 100%; /* Изображение занимает всю ширину */
-            height: auto; /* Высота автоматически подстраивается */
-            transition: transform 0.5s ease; /* Плавный переход для смены изображений */
-        }
-        @keyframes slide {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
+            height: 100vh; /* Высота изображения 100% высоты вьюпорта */
+            object-fit: cover; /* Подгонка изображения по контейнеру */
+            transition: transform 1s ease; /* Плавный переход для смены изображений */
         }
     </style>
 </head>
@@ -48,11 +45,10 @@
         <a href="about.html">О нас</a>
         <a href="contact.html">Контакты</a>
     </nav>
-    <h1>Добро пожаловать на мой сайт</h1>
     <div class="image-slider">
-	<img src="https://www.dropbox.com/scl/fi/jg2cidbu4lr18cn6qc6yl/groupBox1_image.jpeg?rlkey=8r49w3kdkv3zq9dyrddvyd3am&raw=1" alt="Изображение 1" />
-	<img src="https://www.dropbox.com/scl/fi/ru2h7o32bho1heqgc9my4/chart2_image.jpeg?rlkey=mq5nwpr21ve4yo9bhmy0450bo&raw=1" alt="Изображение 2" />
-	<img src="https://www.dropbox.com/scl/fi/cwyqlr5gbfp9jxwmmrm9r/chart1_image.jpeg?rlkey=nukm100uizj4vx5jwtp8dm9wl&raw=1" alt="Изображение 3" />
+        <img src="https://www.dropbox.com/scl/fi/jg2cidbu4lr18cn6qc6yl/groupBox1_image.jpeg?rlkey=8r49w3kdkv3zq9dyrddvyd3am&raw=1" alt="Изображение 1" />
+        <img src="https://www.dropbox.com/scl/fi/ru2h7o32bho1heqgc9my4/chart2_image.jpeg?rlkey=mq5nwpr21ve4yo9bhmy0450bo&raw=1" alt="Изображение 2" />
+        <img src="https://www.dropbox.com/scl/fi/cwyqlr5gbfp9jxwmmrm9r/chart1_image.jpeg?rlkey=nukm100uizj4vx5jwtp8dm9wl&raw=1" alt="Изображение 3" />
         <!-- Добавляйте больше изображений по мере необходимости -->
     </div>
     <script>
@@ -63,6 +59,12 @@
             images[currentIndex].style.transform = 'translateX(-100%)'; // Скрываем текущее изображение
             currentIndex = (currentIndex + 1) % images.length; // Переходим к следующему индексу
             images[currentIndex].style.transform = 'translateX(0)'; // Показываем следующее изображение
+        }
+
+        // Инициализируем первый элемент с нулевым смещением
+        images[0].style.transform = 'translateX(0)';
+        for(let i = 1; i < images.length; i++) {
+            images[i].style.transform = 'translateX(100%)'; // Выносим все остальные изображения вправо
         }
 
         setInterval(showNextImage, 5000); // Меняем изображение каждые 5 секунд
