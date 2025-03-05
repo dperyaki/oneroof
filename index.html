@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JnJ-OneRoof</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -18,7 +21,7 @@
             margin-bottom: 20px;
         }
         nav a {
-            margin: 0 10px;
+            margin: 0 20px;
             text-decoration: none;
             color: red; /* Цвет ссылок на красный */
         }
@@ -49,32 +52,29 @@
         <a href="contact.html">Что то еще</a>
     </nav>
     <div class="image-slider">
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/chart1_image.png" alt="Изображение 1" class="active" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/chart2_image.png" alt="Изображение 2" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/chart3_image.png" alt="Изображение 3" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/chart4_image.png" alt="Изображение 4" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/groupBox1_image.png" alt="Изображение 5" />
-        <!-- Добавляйте больше изображений по мере необходимости -->
+        <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/chart1_image.png" alt="Изображение 1" class="active" />
+        <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/chart2_image.png" alt="Изображение 2" />
+        <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/chart3_image.png" alt="Изображение 3" />
+        <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/chart4_image.png" alt="Изображение 4" />
+        <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/groupBox1_image.png" alt="Изображение 5" />
     </div>
     <script>
         let currentIndex = 0;
         const images = document.querySelectorAll('.image-slider img');
 
         function showNextImage() {
-            images[currentIndex].classList.remove('active'); // Убираем активный класс у текущего изображения
-            currentIndex = (currentIndex + 1) % images.length; // Переходим к следующему индексу
-            images[currentIndex].classList.add('active'); // Добавляем активный класс к следующему изображению
+            images[currentIndex].classList.remove('active'); 
+            currentIndex = (currentIndex + 1) % images.length; 
+            images[currentIndex].classList.add('active'); 
         }
 
-        setInterval(showNextImage, 5000); // Меняем изображение каждые 5 секунд
+        setInterval(showNextImage, 5000); 
 
-        // Функция для обновления страницы
         function refreshPage() {
-            window.location.reload(); // Перезагрузить страницу
+            window.location.reload(); 
         }
 
-        // Установите интервал для обновления страницы каждые 5 минут (300000 миллисекунд)
-        setTimeout(refreshPage, 300000); // Обновляется каждые 5 минут
+        setTimeout(refreshPage, 300000); 
     </script>
 </body>
 </html>
