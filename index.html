@@ -20,33 +20,41 @@
             text-align: left;
             background-color: #d52b1e; /* Красный фон для навигации */
             padding: 15px; /* Отступы внутри навигации */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Тень для навигации */
         }
         nav a {
             margin: 0 20px;
             text-decoration: none;
             color: #ffffff; /* Белый цвет ссылок */
             font-weight: bold; /* Жирный шрифт */
+            transition: color 0.3s; /* Плавный переход для изменения цвета */
         }
         nav a:hover {
+            color: #ffcccc; /* Цвет при наведении */
             text-decoration: underline; /* Подчёркивание при наведении */
         }
         .image-slider {
             position: relative;
             height: 100vh; /* Высота вьюпорта */
             overflow: hidden; /* Отключает прокрутку внутри слайдера */
+            background-color: #f0f0f0; /* Фоновый цвет вокруг изображений */
         }
         .image-slider img {
             position: absolute; /* Изменён стиль на absolute для каждого изображения */
-            top: 0;
-            left: 0;
-            width: 100%; /* Изображение занимает всю ширину */
+            top: 50%;
+            left: 50%;
+            width: auto; /* Высота изображения 100% высоты вьюпорта */
             height: 100%; /* Высота изображения 100% высоты вьюпорта */
-            object-fit: cover; /* Подгонка изображения без искажений */
+            max-width: 100%; /* Ограничение по максимальной ширине */
+            max-height: 100%; /* Ограничение по максимальной высоте */
+            transform: translate(-50%, -50%); /* Центрирование изображений */
+            object-fit: contain; /* Подгонка изображения без искажений */
             opacity: 0; /* Начальный уровень непрозрачности 0 */
-            transition: opacity 1s ease; /* Плавный переход для смены изображений */
+            transition: opacity 1s ease, transform 0.5s; /* Плавный переход для смены изображений */
         }
         .image-slider img.active {
             opacity: 1; /* Полная видимость для активного изображения */
+            transform: translate(-50%, -50%) scale(1.05); /* Увеличение изображения для акцента */
         }
     </style>
 </head>
