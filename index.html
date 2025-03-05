@@ -10,20 +10,25 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            color: red; /* Цвет текста на красный */
+            background-color: #ffffff; /* Белый фон */
+            color: #d52b1e; /* Красный цвет текста */
             margin: 0;
             padding: 0;
             overflow: hidden; /* Отключает прокрутку страницы */
         }
         nav {
             text-align: left;
-            margin-bottom: 20px;
+            background-color: #d52b1e; /* Красный фон для навигации */
+            padding: 15px; /* Отступы внутри навигации */
         }
         nav a {
             margin: 0 20px;
             text-decoration: none;
-            color: red; /* Цвет ссылок на красный */
+            color: #ffffff; /* Белый цвет ссылок */
+            font-weight: bold; /* Жирный шрифт */
+        }
+        nav a:hover {
+            text-decoration: underline; /* Подчёркивание при наведении */
         }
         .image-slider {
             position: relative;
@@ -36,7 +41,7 @@
             left: 0;
             width: 100%; /* Изображение занимает всю ширину */
             height: 100%; /* Высота изображения 100% высоты вьюпорта */
-            object-fit: contain; /* Подгонка изображения без искажений */
+            object-fit: cover; /* Подгонка изображения без искажений */
             opacity: 0; /* Начальный уровень непрозрачности 0 */
             transition: opacity 1s ease; /* Плавный переход для смены изображений */
         }
