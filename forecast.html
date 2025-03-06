@@ -72,11 +72,7 @@
         <a href="forecast.html">Forecast</a>
     </nav>
     <div class="image-slider">
-        <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/chart1_image.png" alt="Изображение 1" class="active" />
-        <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/chart2_image.png" alt="Изображение 2" />
-        <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/chart3_image.png" alt="Изображение 3" />
-        <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/chart4_image.png" alt="Изображение 4" />
-        <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/groupBox1_image.png" alt="Изображение 5" />
+        <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/groupBox1_image.png" alt="Изображение 1" class="active" />
     </div>
     <script>
         let currentIndex = 0;
@@ -88,7 +84,7 @@
             images[currentIndex].classList.add('active'); 
         }
 
-        setInterval(showNextImage, 5000); 
+        setInterval(showNextImage, 50000); 
 
         function refreshPage() {
             window.location.reload(); 
