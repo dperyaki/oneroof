@@ -1,1 +1,25 @@
+name: Update File
 
+on:
+  workflow_dispatch:  # Позволяет запускать workflow вручную
+  push:              # Можно добавить триггер на пуш
+
+jobs:
+  update_file:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Update file
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}  # Используем токен из секретов
+      run: |
+        echo "Saving input to Inbound.txt"
+        echo "${{ github.event.inputs.input_text }}" >> Inbound.txt
+        git config --local user.email "dperyaki@its.jnj.com"  # Замените на ваш email
+        git config --local user.name "dperyaki"          # Замените на ваше имя
+        git add Inbound.txt
+        git commit -m "Update Inbound.txt"
+        git push
