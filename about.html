@@ -97,7 +97,7 @@ document.getElementById('submitButton').onclick = function() {
     const text = document.getElementById('inputText').value;
     if (text) {
         // Получаем текущее содержимое файла
-        fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filePath}?ref=${branch}`, {
+        fetch(`https://api.github.com/repos/${owner}/${repo}/${filePath}?ref=${branch}`, {
             method: 'GET',
             headers: {
                 'Authorization': `token ${token}`
@@ -112,7 +112,7 @@ document.getElementById('submitButton').onclick = function() {
             const updatedContent = currentContent + '\n' + text;
 
             // Обновляем содержимое файла
-            fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`, {
+            fetch(`https://api.github.com/repos/${owner}/${repo}/${filePath}`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `token ${token}`,
@@ -138,7 +138,7 @@ document.getElementById('submitButton').onclick = function() {
 };
 
 document.getElementById('fetchButton').onclick = function() {
-    fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filePath}?ref=${branch}`, {
+    fetch(`https://api.github.com/repos/${owner}/${repo}/${filePath}?ref=${branch}`, {
         method: 'GET',
         headers: {
             'Authorization': `token ${token}`
