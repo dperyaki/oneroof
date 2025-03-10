@@ -84,7 +84,10 @@
             border-radius: 4px;
             cursor: pointer;
         }
-
+        /* Убедитесь, что основной контент по умолчанию скрыт */
+        #mainContent {
+            display: none;
+        }
         /* Медиа-запрос для мобильных устройств */
         @media (max-width: 600px) {
             body {
@@ -107,24 +110,26 @@
         </div>
     </div>
 
-    <nav>
-        <a href="index.html">Продуктивность сборки</a>
-        <a href="contact.html">Forecast</a>
-        <a href="about.html">Тестовая</a>
-    </nav>
-    
-    <div class="image-slider">
-        <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/chart1_image.png" alt="Изображение 1" class="active" />
-        <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/chart2_image.png" alt="Изображение 2" />
-        <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/chart3_image.png" alt="Изображение 3" />
-        <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/chart4_image.png" alt="Изображение 4" />
-        <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/groupBox1_image.png" alt="Изображение 5" />
+    <div id="mainContent">
+        <nav>
+            <a href="index.html">Продуктивность сборки</a>
+            <a href="contact.html">Forecast</a>
+            <a href="about.html">Тестовая</a>
+        </nav>
+
+        <div class="image-slider">
+            <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/chart1_image.png" alt="Изображение 1" class="active" />
+            <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/chart2_image.png" alt="Изображение 2" />
+            <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/chart3_image.png" alt="Изображение 3" />
+            <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/chart4_image.png" alt="Изображение 4" />
+            <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/groupBox1_image.png" alt="Изображение 5" />
+        </div>
     </div>
     
     <script>
         // Задайте заранее определенные логин и пароль
-        const validUsername = 'yourUsername'; // Замените на ваш логин
-        const validPassword = 'yourPassword'; // Замените на ваш пароль
+        const validUsername = 'oneroof'; // Замените на ваш логин
+        const validPassword = 'oneroof2025'; // Замените на ваш пароль
 
         document.getElementById('loginButton').onclick = function() {
             const username = document.getElementById('username').value;
@@ -134,6 +139,7 @@
             if (username === validUsername && password === validPassword) {
                 alert('Успешный вход!');
                 document.getElementById('loginModal').style.display = 'none'; // Закрываем модальное окно
+                document.getElementById('mainContent').style.display = 'block'; // Показываем основной контент
             } else {
                 alert('Ошибка входа: неверное имя пользователя или пароль.');
             }
