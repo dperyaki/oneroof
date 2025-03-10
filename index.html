@@ -72,6 +72,45 @@
         <a href="about.html">Тестовая</a>
 
     </nav>
+
+
+
+
+
+<div class="form-section">
+    <input type="text" id="username" placeholder="Имя пользователя" />
+    <input type="password" id="password" placeholder="Пароль" />
+    <button id="loginButton">Войти</button>
+</div>
+
+
+
+
+
+
+
+
+document.getElementById('loginButton').onclick = function() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    // Задайте заранее определенные логин и пароль
+    const validUsername = 'oneroof';
+    const validPassword = 'oneroof2025';
+
+    // Сравните введенные данные с заранее определенными значениями
+    if (username === validUsername && password === validPassword) {
+        alert('Успешный вход!'); // Обработка успешного входа
+        // Здесь можно перенаправить пользователя на другую страницу или показать контент
+    } else {
+        alert('Ошибка входа: неверное имя пользователя или пароль.'); // Сообщение об ошибке
+    }
+};
+
+
+
+
+
     <div class="image-slider">
         <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/chart1_image.png" alt="Изображение 1" class="active" />
         <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/chart2_image.png" alt="Изображение 2" />
