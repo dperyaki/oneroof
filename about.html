@@ -3,32 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>О нас</title>
+    <title>JnJ-OneRoof</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            color: #333;
+            background-color: #ffffff; /* Белый фон */
+            color: #d52b1e; /* Красный цвет текста */
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            font-size: 16px; /* Базовый размер шрифта */
         }
-        h1 {
-            color: #007BFF;
+        nav {
+            text-align: left;
+            background-color: #d52b1e; /* Красный фон для навигации */
+            padding: 15px; /* Отступы внутри навигации */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Тень для навигации */
         }
         nav a {
-            margin: 0 10px;
+            margin: 0 20px;
             text-decoration: none;
-            color: #007BFF;
+            color: #ffffff; /* Белый цвет ссылок */
+            font-weight: bold; /* Жирный шрифт */
+            transition: color 0.3s; /* Плавный переход для изменения цвета */
+        }
+        nav a:hover {
+            color: #ffcccc; /* Цвет при наведении */
+            text-decoration: underline; /* Подчёркивание при наведении */
+        }
+        .image-slider {
+            position: relative;
+            height: 100vh; /* Высота вьюпорта */
+            overflow: hidden; /* Отключает прокрутку внутри слайдера */
+            background-color: #f0f0f0; /* Фоновый цвет вокруг изображений */
+        }
+        .form-section {
+            padding: 20px;
+            text-align: center;
+        }
+        .form-section input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-section button {
+            padding: 10px 15px;
+            background-color: #d52b1e;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-section button:hover {
+            background-color: #ffcccc;
+            transition: background-color 0.3s;
+        }
+        .output-section {
+            margin-top: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
     </style>
 </head>
 <body>
     <nav>
-        <a href="index.html">Главная</a>
-        <a href="about.html">О нас</a>
-        <a href="contact.html">Контакты</a>
+        <a href="index.html">Продуктивность сборки</a>
+        <a href="about.html">Готовность по маршрутам</a>
+        <a href="forecast.html">Forecast</a>
     </nav>
-    <h1>О нас</h1>
-    <p>Это страница "О нас" моего многостраничного сайта.</p>
+    <div class="image-slider">
+        <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/groupBox1_image.png" alt="Изображение 1" class="active" />
+    </div>
+
+    <div class="form-section">
+        <input type="text" id="inputText" placeholder="Введите текст..." />
+        <button id="submitButton">Сохранить текст</button>
+        <button id="fetchButton">Показать содержимое</button>
+    </div>
+
+    <div class="output-section" id="outputArea">
+        <!-- Содержимое файла будет отображаться здесь -->
+    </div>
+
+    <script>
+const token = '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'; // Ваш токен
+const owner = 'dperyaki'; // Владелец репозитория
+const repo = 'oneroof'; // Название репозитория
+const filePath = 'Inbound.txt'; // Имя файла
+const branch = 'main'; // Ветка репозитория
+
+document.getElementById('submitButton').onclick = function() {
+    const text = document.getElementById('inputText').value;
+    if (text) {
+        // Получаем текущее содержимое файла
+        fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filePath}?ref=${branch}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `token ${token}`
+            }
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Нет доступа к файлу');
+            return response.json();
+        })
+        .then(data => {
+            const currentContent = atob(data.content); // Декодируем содержимое из base64
+            const updatedContent = currentContent + '\n' + text;
+
+            // Обновляем содержимое файла
+            fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `token ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: "Обновление файла Inbound.txt",
+                    content: btoa(updatedContent), // Кодируем содержимое в base64
+                    sha: data.sha, // SHA текущей версии файла
+                    branch: branch
+                })
+            })
+            .then(() => {
+                alert('Текст успешно сохранён!');
+                document.getElementById('inputText').value = ''; // Очищаем поле ввода
+            });
+        })
+        .catch(error => {
+            console.error(error);
+            alert('Ошибка при сохранении текста: ' + error.message);
+        });
+    }
+};
+
+document.getElementById('fetchButton').onclick = function() {
+    fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filePath}?ref=${branch}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `token ${token}`
+        }
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Нет доступа к файлу');
+        return response.json();
+    })
+    .then(data => {
+        const content = atob(data.content); // Декодируем содержимое из base64
+        document.getElementById('outputArea').innerText = content;
+    })
+    .catch(error => {
+        console.error(error);
+        alert('Ошибка при получении данных: ' + error.message);
+    });
+};
+    </script>
 </body>
 </html>
