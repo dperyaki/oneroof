@@ -72,8 +72,8 @@
 <body>
     <nav>
         <a href="index.html">Продуктивность сборки</a>
+        <a href="about.html">Готовность по маршрутам</a>
         <a href="forecast.html">Forecast</a>
-        <a href="about.html">Тестовая</a>
     </nav>
 
     <div class="form-section">
@@ -97,14 +97,19 @@ document.getElementById('submitButton').onclick = function() {
     const text = document.getElementById('inputText').value;
     if (text) {
         // Получаем текущее содержимое файла
-        fetch(`https://api.github.com/repos/${owner}/${repo}/${filePath}?ref=${branch}`, {
+        fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filePath}?ref=${branch}`, {
             method: 'GET',
             headers: {
-                'Authorization': `token ${token}`
+                'Authorization': `token ${token}`,
+                'User-Agent': 'my-app' // Добавьте User-Agent
             }
         })
         .then(response => {
-            if (!response.ok) throw new Error('Нет доступа к файлу');
+            if (!response.ok) {
+                return response.json().then(err => {
+                    throw new Error(`Ошибка: ${err.message} (Статус: ${response.status})`);
+                });
+            }
             return response.json();
         })
         .then(data => {
@@ -112,11 +117,12 @@ document.getElementById('submitButton').onclick = function() {
             const updatedContent = currentContent + '\n' + text;
 
             // Обновляем содержимое файла
-            fetch(`https://api.github.com/repos/${owner}/${repo}/${filePath}`, {
+            fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `token ${token}`,
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'User-Agent': 'my-app' // Добавьте User-Agent
                 },
                 body: JSON.stringify({
                     message: "Обновление файла Inbound.txt",
@@ -125,7 +131,12 @@ document.getElementById('submitButton').onclick = function() {
                     branch: branch
                 })
             })
-            .then(() => {
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(err => {
+                        throw new Error(`Ошибка при обновлении: ${err.message} (Статус: ${response.status})`);
+                    });
+                }
                 alert('Текст успешно сохранён!');
                 document.getElementById('inputText').value = ''; // Очищаем поле ввода
             });
@@ -138,14 +149,19 @@ document.getElementById('submitButton').onclick = function() {
 };
 
 document.getElementById('fetchButton').onclick = function() {
-    fetch(`https://api.github.com/repos/${owner}/${repo}/${filePath}?ref=${branch}`, {
+    fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filePath}?ref=${branch}`, {
         method: 'GET',
         headers: {
-            'Authorization': `token ${token}`
+            'Authorization': `token ${token}`,
+            'User-Agent': 'my-app' // Добавьте User-Agent
         }
     })
     .then(response => {
-        if (!response.ok) throw new Error('Нет доступа к файлу');
+        if (!response.ok) {
+            return response.json().then(err => {
+                throw new Error(`Ошибка: ${err.message} (Статус: ${response.status})`);
+            });
+        }
         return response.json();
     })
     .then(data => {
