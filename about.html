@@ -33,77 +33,26 @@
             color: #ffcccc; /* Цвет при наведении */
             text-decoration: underline; /* Подчёркивание при наведении */
         }
-        .form-section {
-            padding: 20px;
-            text-align: center;
+        .image-slider {
+            position: relative;
+            height: 100vh; /* Высота вьюпорта */
+            overflow: hidden; /* Отключает прокрутку внутри слайдера */
+            background-color: #f0f0f0; /* Фоновый цвет вокруг изображений */
         }
-        .form-section input[type="text"] {
-            padding: 10px;
-            width: 300px;
-            margin-right: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+        .image-slider img {
+            position: absolute; /* Изменён стиль на absolute для каждого изображения */
+            top: 0;
+            left: 0;
+            width: 100%; /* Изображение занимает всю ширину */
+            height: 100%; /* Высота изображения 100% высоты вьюпорта */
+            object-fit: contain; /* Подгонка изображения без искажений */
+            opacity: 0; /* Начальный уровень непрозрачности 0 */
+            transition: opacity 1s ease; /* Плавный переход для смены изображений */
         }
-        .form-section button {
-            padding: 10px 15px;
-            background-color: #d52b1e;
-            border: none;
-            color: white;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .form-section button:hover {
-            background-color: #ffcccc;
-            transition: background-color 0.3s;
-        }
-        .output-section {
-            margin-top: 20px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: left;
-            background-color: #f9f9f9;
-            padding: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+        .image-slider img.active {
+            opacity: 1; /* Полная видимость для активного изображения */
         }
 
-        /* Стиль для модального окна */
-        #loginModal {
-            display: flex; /* Показываем модальное окно */
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон */
-            justify-content: center;
-            align-items: center;
-            z-index: 1000; /* Убедитесь, что модальное окно поверх остального контента */
-        }
-        .modal-content {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 5px;
-            text-align: center;
-        }
-        .modal-content input {
-            margin: 10px;
-            padding: 10px;
-            width: 200px;
-        }
-        .modal-content button {
-            padding: 10px 15px;
-            background-color: #d52b1e;
-            border: none;
-            color: white;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        /* Убедитесь, что основной контент по умолчанию скрыт */
-        #mainContent {
-            display: none;
-        }
         /* Медиа-запрос для мобильных устройств */
         @media (max-width: 600px) {
             body {
@@ -114,148 +63,34 @@
                 font-size: 12px; /* Уменьшить размер шрифта ссылок */
             }
         }
-
     </style>
 </head>
 <body>
-
-    <div id="loginModal">
-        <div class="modal-content">
-            <h2>Вход</h2>
-            <input type="text" id="username" placeholder="Имя пользователя" />
-            <input type="password" id="password" placeholder="Пароль" />
-            <button id="loginButton">Войти</button>
-        </div>
-    </div>
-    <div id="mainContent">
     <nav>
         <a href="index.html">Продуктивность сборки</a>
         <a href="forecast.html">Forecast</a>
         <a href="about.html">Тестовая</a>
     </nav>
+    <div class="image-slider">
+        <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/groupBox6_image.png" alt="Изображение 1" class="active" />
     </div>
-
-    <div class="form-section">
-        <input type="text" id="inputText" placeholder="Введите текст..." />
-        <button id="submitButton">Сохранить текст</button>
-        <button id="fetchButton">Показать содержимое</button>
-    </div>
-
-    <div class="output-section" id="outputArea">
-        <!-- Содержимое файла будет отображаться здесь -->
-    </div>
-
     <script>
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.image-slider img');
 
-
-        // Задайте заранее определенные логин и пароль
-        const validUsername = 'oneroof'; // Замените на ваш логин
-        const validPassword = 'oneroof2025'; // Замените на ваш пароль
-
-        document.getElementById('loginButton').onclick = function() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            // Проверяем введенные данные
-            if (username === validUsername && password === validPassword) {
-                alert('Успешный вход!');
-                document.getElementById('loginModal').style.display = 'none'; // Закрываем модальное окно
-                document.getElementById('mainContent').style.display = 'block'; // Показываем основной контент
-            } else {
-                alert('Ошибка входа: неверное имя пользователя или пароль.');
-            }
-        };
-
-
-
-
-
-
-const owner = 'dperyaki'; // Владелец репозитория
-const repo = 'oneroof'; // Название репозитория
-const filePath = 'Inbound.txt'; // Имя файла
-const branch = 'main'; // Ветка репозитория
-
-document.getElementById('submitButton').onclick = function() {
-    const text = document.getElementById('inputText').value;
-    if (text) {
-        // Получаем текущее содержимое файла
-        fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filePath}?ref=${branch}`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `token ${token}`,
-                'User-Agent': 'my-app' // Добавьте User-Agent
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                return response.json().then(err => {
-                    throw new Error(`Ошибка: ${err.message} (Статус: ${response.status})`);
-                });
-            }
-            return response.json();
-        })
-        .then(data => {
-            const currentContent = atob(data.content); // Декодируем содержимое из base64
-            const updatedContent = currentContent + '\n' + text;
-
-            // Обновляем содержимое файла
-            fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`, {
-                method: 'PUT',
-                headers: {
-                    'Authorization': `token ${token}`,
-                    'Content-Type': 'application/json',
-                    'User-Agent': 'my-app' // Добавьте User-Agent
-                },
-                body: JSON.stringify({
-                    message: "Обновление файла Inbound.txt",
-                    content: btoa(updatedContent), // Кодируем содержимое в base64
-                    sha: data.sha, // SHA текущей версии файла
-                    branch: branch
-                })
-            })
-            .then(response => {
-                if (!response.ok) {
-                    return response.json().then(err => {
-                        throw new Error(`Ошибка при обновлении: ${err.message} (Статус: ${response.status})`);
-                    });
-                }
-                alert('Текст успешно сохранён!');
-                document.getElementById('inputText').value = ''; // Очищаем поле ввода
-            });
-        })
-        .catch(error => {
-            console.error(error);
-            alert('Ошибка при сохранении текста: ' + error.message);
-        });
-    }
-};
-
-document.getElementById('fetchButton').onclick = function() {
-    fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filePath}?ref=${branch}`, {
-        method: 'GET',
-        headers: {
-            'Authorization': `token ${token}`,
-            'User-Agent': 'my-app' // Добавьте User-Agent
+        function showNextImage() {
+            images[currentIndex].classList.remove('active'); 
+            currentIndex = (currentIndex + 1) % images.length; 
+            images[currentIndex].classList.add('active'); 
         }
-    })
-    .then(response => {
-        if (!response.ok) {
-            return response.json().then(err => {
-                throw new Error(`Ошибка: ${err.message} (Статус: ${response.status})`);
-            });
+
+        setInterval(showNextImage, 50000); 
+
+        function refreshPage() {
+            window.location.reload(); 
         }
-        return response.json();
-    })
-    .then(data => {
-        const content = atob(data.content); // Декодируем содержимое из base64
-        document.getElementById('outputArea').innerText = content;
-    })
-    .catch(error => {
-        console.error(error);
-        alert('Ошибка при получении данных: ' + error.message);
-    });
-};
+
+        setTimeout(refreshPage, 300000); 
     </script>
 </body>
 </html>
