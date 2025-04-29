@@ -78,24 +78,8 @@
     <div class="image-slider">
                 <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide1.JPG" alt="Изображение 1" class="active" />
 <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide2.JPG" alt="Изображение 2" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide3.JPG" alt="Изображение 3" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide4.JPG" alt="Изображение 4" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide5.JPG" alt="Изображение 5" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide6.JPG" alt="Изображение 6" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide7.JPG" alt="Изображение 7" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide8.JPG" alt="Изображение 8" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide9.JPG" alt="Изображение 9" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide10.JPG" alt="Изображение 10" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide11.JPG" alt="Изображение 11" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide12.JPG" alt="Изображение 12" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide13.JPG" alt="Изображение 13" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide14.JPG" alt="Изображение 14" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide15.JPG" alt="Изображение 15" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide16.JPG" alt="Изображение 16" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide17.JPG" alt="Изображение 17" />
-
-        <img src="image1.jpg" class="active" alt="Image 1">
-        <img src="image2.jpg" alt="Image 2">
+        <img src="image1.jpg" class="active" alt="">
+        <img src="image2.jpg" alt="">
         
         <!-- Контейнер для карты -->
         <div id="map" class="map-container"></div>
@@ -110,15 +94,13 @@
           var myMap = new ymaps.Map("map", {
               center: [55.7558, 37.6173], // Координаты центра Москвы
               zoom: 10,
-              controls:['zoomControl', 'trafficControl'] // Добавляем элементы управления
+              controls:['zoomControl'] // Добавляем элементы управления
           });
 
           // Включаем пробки
-          myMap.controls.add('trafficControl');
-          myMap.setType('yandex#map'); // Устанавливаем тип карты
-          
-          // Добавляем пробки
-          myMap.setTrafficOn(true);
+          var trafficControl = new ymaps.control.TrafficControl();
+          myMap.controls.add(trafficControl);
+          trafficControl.show(); // Показываем пробки
       }
 
       ymaps.ready(init);
