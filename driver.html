@@ -39,23 +39,20 @@
             overflow: hidden; /* Отключает прокрутку внутри слайдера */
             background-color: #f0f0f0; /* Фоновый цвет вокруг изображений */
         }
-        .image-slider img {
-            position: absolute; /* Изменён стиль на absolute для каждого изображения */
+        .image-slider img,
+        .map-container {
+            position: absolute; /* Изменён стиль на absolute для каждого изображения и карты */
             top: 0;
             left: 0;
-            width: 100%; /* Изображение занимает всю ширину */
-            height: 100%; /* Высота изображения 100% высоты вьюпорта */
+            width: 100%; /* Элемент занимает всю ширину */
+            height: 100%; /* Высота элемента 100% высоты вьюпорта */
             object-fit: contain; /* Подгонка изображения без искажений */
             opacity: 0; /* Начальный уровень непрозрачности 0 */
-            transition: opacity 1s ease; /* Плавный переход для смены изображений */
+            transition: opacity 1s ease; /* Плавный переход для смены элементов */
         }
-        .image-slider img.active {
-            opacity: 1; /* Полная видимость для активного изображения */
-        }
-
-        .map-container {
-            width: 100%;
-            height: 400px; /* Высота карты */
+        .image-slider img.active,
+        .map-container.active {
+            opacity: 1; /* Полная видимость для активного элемента */
         }
 
         @media (max-width: 600px) {
@@ -96,17 +93,20 @@
 <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide15.JPG" alt="Изображение 15" />
 <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide16.JPG" alt="Изображение 16" />
 <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide17.JPG" alt="Изображение 17" />
-    </div>
 
-    <!-- Контейнер для карты -->
-    <div id="map" class="map-container"></div>
+        <img src="image1.jpg" class="active" alt="Image 1">
+        <img src="image2.jpg" alt="Image 2">
+        
+        <!-- Контейнер для карты -->
+        <div id="map" class="map-container"></div>
+    </div>
 
     <!-- Скрипт Яндекс.Карт -->
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=99f7b400-8034-4788-824b-b04cb205b977"></script>
-    
+
     <script>
-        // Инициализация карты
-        function init() {
+      // Инициализация карты
+      function init() {
           var myMap = new ymaps.Map("map", {
               center: [55.7558, 37.6173], // Координаты центра Москвы
               zoom: 10,
@@ -125,14 +125,26 @@
 
       let currentIndex = 0;
       const images = document.querySelectorAll('.image-slider img');
+      const mapContainer = document.getElementById('map');
 
-      function showNextImage() {
+      function showNextElement() {
           images[currentIndex].classList.remove('active'); 
-          currentIndex = (currentIndex + 1) % images.length; 
-          images[currentIndex].classList.add('active'); 
+          
+          if (currentIndex === images.length - 1) { // Если это последний элемент (карта)
+              mapContainer.classList.remove('active');
+              currentIndex = -1; // Сброс индекса для следующего цикла
+          } else if (currentIndex === images.length - 2) { // Если это предпоследний элемент (карта)
+              mapContainer.classList.add('active');
+              currentIndex++;
+          } else {
+              currentIndex++;
+              images[currentIndex].classList.add('active'); 
+          }
+
+          setTimeout(showNextElement, currentIndex === images.length - 1 ? 20000 : 10000); // Устанавливаем таймер на основе текущего элемента
       }
 
-      setInterval(showNextImage, 10000); 
+      setTimeout(showNextElement, 10000); // Начинаем с первого элемента
 
       function refreshPage() {
           window.location.reload(); 
