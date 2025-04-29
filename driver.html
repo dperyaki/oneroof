@@ -52,6 +52,7 @@
         .image-slider img.active {
             opacity: 1; /* Полная видимость для активного изображения */
         }
+
         /* Медиа-запрос для мобильных устройств */
         @media (max-width: 600px) {
             body {
@@ -65,25 +66,28 @@
     </style>
 </head>
 <body>
-    <div id="mainContent">
-        <nav>
+    <nav>
             <a href="index.html">Продуктивность сборки</a>
             <a href="forecast.html">Forecast Moscow</a>
             <a href="about.html">Forecast Regions</a>
 	<a href="driver.html">Driver</a>
 <a href="outbound.html">Outbound</a>
-        </nav>
-
-        <div class="image-slider">
-            <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/chart1_image.png" alt="Изображение 1" class="active" />
-            <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/chart2_image.png" alt="Изображение 2" />
-            <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/chart3_image.png" alt="Изображение 3" />
-            <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/chart4_image.png" alt="Изображение 4" />
-            <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/groupBox1_image.png" alt="Изображение 5" />
-		<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/groupBox6_image.png" alt="Изображение 6" />
-        </div>
+    </nav>
+    <div class="image-slider">
+        <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide1.JPG" alt="Изображение 1" class="active" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide2.JPG" alt="Изображение 2" class="active" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide3.JPG" alt="Изображение 3" class="active" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide4.JPG" alt="Изображение 4" class="active" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide5.JPG" alt="Изображение 5" class="active" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide6.JPG" alt="Изображение 6" class="active" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide7.JPG" alt="Изображение 7" class="active" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide8.JPG" alt="Изображение 8" class="active" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide9.JPG" alt="Изображение 9" class="active" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide10.JPG" alt="Изображение 10" class="active" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide11.JPG" alt="Изображение 11" class="active" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide12.JPG" alt="Изображение 12" class="active" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide13.JPG" alt="Изображение 13" class="active" />
     </div>
-    
     <script>
         let currentIndex = 0;
         const images = document.querySelectorAll('.image-slider img');
@@ -94,7 +98,7 @@
             images[currentIndex].classList.add('active'); 
         }
 
-        setInterval(showNextImage, 5000); 
+        setInterval(showNextImage, 50000); 
 
         function refreshPage() {
             window.location.reload(); 
