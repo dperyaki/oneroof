@@ -53,7 +53,11 @@
             opacity: 1; /* Полная видимость для активного изображения */
         }
 
-        /* Медиа-запрос для мобильных устройств */
+        .map-container {
+            width: 100%;
+            height: 400px; /* Высота карты */
+        }
+
         @media (max-width: 600px) {
             body {
                 font-size: 14px; /* Уменьшить размер шрифта для мобильных устройств */
@@ -67,14 +71,15 @@
 </head>
 <body>
     <nav>
-            <a href="index.html">Продуктивность сборки</a>
-            <a href="forecast.html">Forecast Moscow</a>
-            <a href="about.html">Forecast Regions</a>
+        <a href="index.html">Продуктивность сборки</a>
+        <a href="forecast.html">Forecast Moscow</a>
+        <a href="about.html">Forecast Regions</a>
 	<a href="driver.html">Driver</a>
-<a href="outbound.html">Outbound</a>
+	<a href="outbound.html">Outbound</a>
     </nav>
+
     <div class="image-slider">
-        <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide1.JPG" alt="Изображение 1" class="active" />
+                <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide1.JPG" alt="Изображение 1" class="active" />
 <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide2.JPG" alt="Изображение 2" />
 <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide3.JPG" alt="Изображение 3" />
 <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide4.JPG" alt="Изображение 4" />
@@ -92,23 +97,48 @@
 <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide16.JPG" alt="Изображение 16" />
 <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide17.JPG" alt="Изображение 17" />
     </div>
+
+    <!-- Контейнер для карты -->
+    <div id="map" class="map-container"></div>
+
+    <!-- Скрипт Яндекс.Карт -->
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=99f7b400-8034-4788-824b-b04cb205b977"></script>
+    
     <script>
-        let currentIndex = 0;
-        const images = document.querySelectorAll('.image-slider img');
+        // Инициализация карты
+        function init() {
+          var myMap = new ymaps.Map("map", {
+              center: [55.7558, 37.6173], // Координаты центра Москвы
+              zoom: 10,
+              controls:['zoomControl', 'trafficControl'] // Добавляем элементы управления
+          });
 
-        function showNextImage() {
-            images[currentIndex].classList.remove('active'); 
-            currentIndex = (currentIndex + 1) % images.length; 
-            images[currentIndex].classList.add('active'); 
-        }
+          // Включаем пробки
+          myMap.controls.add('trafficControl');
+          myMap.setType('yandex#map'); // Устанавливаем тип карты
+          
+          // Добавляем пробки
+          myMap.setTrafficOn(true);
+      }
 
-        setInterval(showNextImage, 10000); 
+      ymaps.ready(init);
 
-        function refreshPage() {
-            window.location.reload(); 
-        }
+      let currentIndex = 0;
+      const images = document.querySelectorAll('.image-slider img');
 
-        setTimeout(refreshPage, 300000); 
+      function showNextImage() {
+          images[currentIndex].classList.remove('active'); 
+          currentIndex = (currentIndex + 1) % images.length; 
+          images[currentIndex].classList.add('active'); 
+      }
+
+      setInterval(showNextImage, 10000); 
+
+      function refreshPage() {
+          window.location.reload(); 
+      }
+
+      setTimeout(refreshPage, 300000); 
     </script>
 </body>
 </html>
