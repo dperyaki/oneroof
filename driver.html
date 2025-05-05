@@ -39,22 +39,21 @@
             overflow: hidden; /* Отключает прокрутку внутри слайдера */
             background-color: #f0f0f0; /* Фоновый цвет вокруг изображений */
         }
-        .image-slider img,
-        .map-container {
-            position: absolute; /* Изменён стиль на absolute для каждого изображения и карты */
+        .image-slider img {
+            position: absolute; /* Изменён стиль на absolute для каждого изображения */
             top: 0;
             left: 0;
-            width: 100%; /* Элемент занимает всю ширину */
-            height: 100%; /* Высота элемента 100% высоты вьюпорта */
+            width: 100%; /* Изображение занимает всю ширину */
+            height: 100%; /* Высота изображения 100% высоты вьюпорта */
             object-fit: contain; /* Подгонка изображения без искажений */
             opacity: 0; /* Начальный уровень непрозрачности 0 */
-            transition: opacity 1s ease; /* Плавный переход для смены элементов */
+            transition: opacity 1s ease; /* Плавный переход для смены изображений */
         }
-        .image-slider img.active,
-        .map-container.active {
-            opacity: 1; /* Полная видимость для активного элемента */
+        .image-slider img.active {
+            opacity: 1; /* Полная видимость для активного изображения */
         }
 
+        /* Медиа-запрос для мобильных устройств */
         @media (max-width: 600px) {
             body {
                 font-size: 14px; /* Уменьшить размер шрифта для мобильных устройств */
@@ -68,70 +67,48 @@
 </head>
 <body>
     <nav>
-        <a href="index.html">Продуктивность сборки</a>
-        <a href="forecast.html">Forecast Moscow</a>
-        <a href="about.html">Forecast Regions</a>
+            <a href="index.html">Продуктивность сборки</a>
+            <a href="forecast.html">Forecast Moscow</a>
+            <a href="about.html">Forecast Regions</a>
 	<a href="driver.html">Driver</a>
-	<a href="outbound.html">Outbound</a>
+<a href="outbound.html">Outbound</a>
     </nav>
-
     <div class="image-slider">
-                <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide1.JPG" alt="Изображение 1" class="active" />
-                <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide2.JPG" alt="Изображение 2" />        
-                
-        
-                <!-- Контейнер для карты -->
-                <div id="map" class="map-container"></div>
+        <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide1.JPG" alt="Изображение 1" class="active" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide2.JPG" alt="Изображение 2" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide3.JPG" alt="Изображение 3" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide4.JPG" alt="Изображение 4" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide5.JPG" alt="Изображение 5" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide6.JPG" alt="Изображение 6" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide7.JPG" alt="Изображение 7" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide8.JPG" alt="Изображение 8" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide9.JPG" alt="Изображение 9" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide10.JPG" alt="Изображение 10" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide11.JPG" alt="Изображение 11" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide12.JPG" alt="Изображение 12" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide13.JPG" alt="Изображение 13" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide14.JPG" alt="Изображение 14" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide15.JPG" alt="Изображение 15" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide16.JPG" alt="Изображение 16" />
+<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide17.JPG" alt="Изображение 17" />
     </div>
-
-    <!-- Скрипт Яндекс.Карт -->
-    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=108be551-7938-42d2-bde3-8dda5487a836&modules=traffic"></script>
-
     <script>
-      // Инициализация карты
-      function init() {
-          var myMap = new ymaps.Map("map", {
-              center: [55.7558, 37.6173], // Координаты центра Москвы
-              zoom: 50,
-              controls:['zoomControl'] // Добавляем элементы управления
-          });
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.image-slider img');
 
-          // Включаем пробки
-          var trafficControl = new ymaps.control.TrafficControl();
-          myMap.controls.add(trafficControl);
-          trafficControl.show(); // Показываем пробки
-      }
+        function showNextImage() {
+            images[currentIndex].classList.remove('active'); 
+            currentIndex = (currentIndex + 1) % images.length; 
+            images[currentIndex].classList.add('active'); 
+        }
 
-      ymaps.ready(init);
+        setInterval(showNextImage, 10000); 
 
-      let currentIndex = 0;
-      const images = document.querySelectorAll('.image-slider img');
-      const mapContainer = document.getElementById('map');
+        function refreshPage() {
+            window.location.reload(); 
+        }
 
-      function showNextElement() {
-          images[currentIndex].classList.remove('active'); 
-          
-          if (currentIndex === images.length - 1) { // Если это последний элемент (карта)
-              mapContainer.classList.remove('active');
-              currentIndex = -1; // Сброс индекса для следующего цикла
-          } else if (currentIndex === images.length - 2) { // Если это предпоследний элемент (карта)
-              mapContainer.classList.add('active');
-              currentIndex++;
-          } else {
-              currentIndex++;
-              images[currentIndex].classList.add('active'); 
-          }
-
-          setTimeout(showNextElement, currentIndex === images.length - 1 ? 20000 : 10000); // Устанавливаем таймер на основе текущего элемента
-      }
-
-      setTimeout(showNextElement, 5000); // Начинаем с первого элемента
-
-      function refreshPage() {
-          window.location.reload(); 
-      }
-
-      setTimeout(refreshPage, 300000); 
+        setTimeout(refreshPage, 300000); 
     </script>
 </body>
 </html>
