@@ -1,114 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JnJ-OneRoof</title>
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #ffffff; /* Белый фон */
-            color: #d52b1e; /* Красный цвет текста */
-            margin: 0;
-            padding: 0;
-            font-size: 16px; /* Базовый размер шрифта */
-        }
-        nav {
-            text-align: left;
-            background-color: #d52b1e; /* Красный фон для навигации */
-            padding: 15px; /* Отступы внутри навигации */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Тень для навигации */
-        }
-        nav a {
-            margin: 0 20px;
-            text-decoration: none;
-            color: #ffffff; /* Белый цвет ссылок */
-            font-weight: bold; /* Жирный шрифт */
-            transition: color 0.3s; /* Плавный переход для изменения цвета */
-        }
-        nav a:hover {
-            color: #ffcccc; /* Цвет при наведении */
-            text-decoration: underline; /* Подчёркивание при наведении */
-        }
-        .image-slider {
-            position: relative;
-            height: 100vh; /* Высота вьюпорта */
-            overflow: hidden; /* Отключает прокрутку внутри слайдера */
-            background-color: #f0f0f0; /* Фоновый цвет вокруг изображений */
-        }
-        .image-slider img {
-            position: absolute; /* Изменён стиль на absolute для каждого изображения */
-            top: 0;
-            left: 0;
-            width: 100%; /* Изображение занимает всю ширину */
-            height: 100%; /* Высота изображения 100% высоты вьюпорта */
-            object-fit: contain; /* Подгонка изображения без искажений */
-            opacity: 0; /* Начальный уровень непрозрачности 0 */
-            transition: opacity 1s ease; /* Плавный переход для смены изображений */
-        }
-        .image-slider img.active {
-            opacity: 1; /* Полная видимость для активного изображения */
-        }
-
-        /* Медиа-запрос для мобильных устройств */
-        @media (max-width: 600px) {
-            body {
-                font-size: 14px; /* Уменьшить размер шрифта для мобильных устройств */
-            }
-            nav a {
-                margin: 0 10px; /* Уменьшите отступы между ссылками */
-                font-size: 12px; /* Уменьшить размер шрифта ссылок */
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JnJ-OneRoof</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #ffffff; color: #d52b1e; margin: 0; padding: 0; font-size: 16px; }
+    nav { text-align: left; background-color: #d52b1e; padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+    nav a { margin: 0 20px; text-decoration: none; color: #ffffff; font-weight: bold; transition: color 0.3s; }
+    nav a:hover { color: #ffcccc; text-decoration: underline; }
+    .image-slider { position: relative; height: 100vh; overflow: hidden; background-color: #f0f0f0; }
+    .image-slider img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity 1s ease; }
+    .image-slider img.active { opacity: 1; }
+    @media (max-width: 600px) { body { font-size: 14px; } nav a { margin: 0 10px; font-size: 12px; } }
+  </style>
 </head>
 <body>
-    <nav>
-            <a href="index.html">Продуктивность сборки</a>
-            <a href="forecast.html">Forecast Moscow</a>
-            <a href="about.html">Forecast Regions</a>
-	<a href="driver.html">Driver</a>
-<a href="outbound.html">Outbound</a>
-    </nav>
-    <div class="image-slider">
-        <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide1.JPG" alt="Изображение 1" class="active" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide2.JPG" alt="Изображение 2" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide3.JPG" alt="Изображение 3" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide4.JPG" alt="Изображение 4" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide5.JPG" alt="Изображение 5" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide6.JPG" alt="Изображение 6" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide7.JPG" alt="Изображение 7" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide8.JPG" alt="Изображение 8" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide9.JPG" alt="Изображение 9" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide10.JPG" alt="Изображение 10" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide11.JPG" alt="Изображение 11" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide12.JPG" alt="Изображение 12" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide13.JPG" alt="Изображение 13" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide14.JPG" alt="Изображение 14" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide15.JPG" alt="Изображение 15" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide16.JPG" alt="Изображение 16" />
-<img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide17.JPG" alt="Изображение 17" />
-    </div>
-    <script>
-        let currentIndex = 0;
-        const images = document.querySelectorAll('.image-slider img');
+  <nav>
+    <a href="index.html">Продуктивность сборки</a>
+    <a href="forecast.html">Forecast Moscow</a>
+    <a href="about.html">Forecast Regions</a>
+    <a href="driver.html">Driver</a>
+    <a href="outbound.html">Outbound</a>
+    <a href="shipments.html">Shipments</a>
+  </nav>
 
-        function showNextImage() {
-            images[currentIndex].classList.remove('active'); 
-            currentIndex = (currentIndex + 1) % images.length; 
-            images[currentIndex].classList.add('active'); 
-        }
+  <div class="image-slider">
+    <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide1.JPG"  alt="Изображение 1"  class="active" />
+    <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide2.JPG"  alt="Изображение 2" />
+    <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide3.JPG"  alt="Изображение 3" />
+    <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide4.JPG"  alt="Изображение 4" />
+    <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide5.JPG"  alt="Изображение 5" />
+    <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide6.JPG"  alt="Изображение 6" />
+    <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide7.JPG"  alt="Изображение 7" />
+    <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide8.JPG"  alt="Изображение 8" />
+    <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide9.JPG"  alt="Изображение 9" />
+    <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide10.JPG" alt="Изображение 10" />
+    <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide11.JPG" alt="Изображение 11" />
+    <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide12.JPG" alt="Изображение 12" />
+    <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide13.JPG" alt="Изображение 13" />
+    <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide14.JPG" alt="Изображение 14" />
+    <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide15.JPG" alt="Изображение 15" />
+    <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide16.JPG" alt="Изображение 16" />
+    <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/Slide17.JPG" alt="Изображение 17" />
+  </div>
 
-        setInterval(showNextImage, 10000); 
+  <script>
+    let currentIndex = 0;
+    const images = document.querySelectorAll('.image-slider img');
+    function showNextImage() {
+      images[currentIndex].classList.remove('active');
+      currentIndex = (currentIndex + 1) % images.length;
+      images[currentIndex].classList.add('active');
+    }
+    setInterval(showNextImage, 10000);
 
-        function refreshPage() {
-            window.location.reload(); 
-        }
-
-        setTimeout(refreshPage, 300000); 
-    </script>
+    function refreshPage() { window.location.reload(); }
+    setTimeout(refreshPage, 300000);
+  </script>
 </body>
 </html>

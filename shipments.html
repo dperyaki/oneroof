@@ -28,10 +28,15 @@
   </nav>
 
   <div class="image-slider">
-    <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/groupBox6_image.png" alt="Изображение 1" class="active" />
+    <!-- Используем тот же подход, что и на других страницах — raw GitHub URL -->
+    <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/tabPage8_image.png" alt="Shipments" class="active" />
+    <!-- Если файл лежит локально рядом в /images, можно так:
+    <img src="images/tabPage8_image.png" alt="Shipments" class="active" />
+    -->
   </div>
 
   <script>
+    // Автообновление каждые 5 минут для единообразия с другими страницами
     function refreshPage() { window.location.reload(); }
     setTimeout(refreshPage, 300000);
   </script>
