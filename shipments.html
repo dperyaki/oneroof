@@ -1,44 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JnJ-OneRoof</title>
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shipments — JnJ OneRoof</title>
   <style>
-    body { font-family: Arial, sans-serif; background-color: #ffffff; color: #d52b1e; margin: 0; padding: 0; font-size: 16px; }
-    nav { text-align: left; background-color: #d52b1e; padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
-    nav a { margin: 0 20px; text-decoration: none; color: #ffffff; font-weight: bold; transition: color 0.3s; }
-    nav a:hover { color: #ffcccc; text-decoration: underline; }
-    .image-slider { position: relative; height: 100vh; overflow: hidden; background-color: #f0f0f0; }
-    .image-slider img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; opacity: 1; transition: opacity 1s ease; }
-    @media (max-width: 600px) { body { font-size: 14px; } nav a { margin: 0 10px; font-size: 12px; } }
+    :root{ --brand:#d52b1e; --bg:#ffffff; --ink:#222; --header-h:60px; }
+    *{box-sizing:border-box;margin:0;padding:0} html,body{height:100%}
+    body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);overflow:hidden}
+    header{position:fixed;inset:0 0 auto 0;height:var(--header-h);background:var(--brand);color:#fff;display:flex;align-items:center;gap:18px;padding:0 16px;z-index:10;box-shadow:0 4px 18px rgba(0,0,0,.15)}
+    header .brand{font-weight:700}
+    header nav{display:flex;gap:12px;overflow-x:auto} header nav::-webkit-scrollbar{display:none}
+    header a{color:#fff;text-decoration:none;font-weight:600;white-space:nowrap;padding:6px 10px;border-radius:6px;transition:.2s}
+    header a:hover{background:rgba(255,255,255,.2)} header a.is-active{background:#fff;color:var(--brand)}
+    .slider{position:absolute;top:var(--header-h);left:0;right:0;bottom:0;height:calc(100vh - var(--header-h));background:#fff;overflow:hidden}
+    .slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:1}
+    .slide img{width:100%;height:100%;object-fit:contain;background:#fff;user-select:none;-webkit-user-drag:none}
   </style>
 </head>
 <body>
+<header>
+  <div class="brand">OneRoof</div>
   <nav>
     <a href="index.html">Продуктивность сборки</a>
     <a href="forecast.html">Forecast Moscow</a>
     <a href="about.html">Forecast Regions</a>
     <a href="driver.html">Driver</a>
     <a href="outbound.html">Outbound</a>
-    <a href="shipments.html">Shipments</a>
+    <a href="shipments.html" class="is-active">Shipments</a>
   </nav>
+</header>
 
-  <div class="image-slider">
-    <!-- Используем тот же подход, что и на других страницах — raw GitHub URL -->
-    <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/tabPage8_image.png" alt="Shipments" class="active" />
-    <!-- Если файл лежит локально рядом в /images, можно так:
-    <img src="images/tabPage8_image.png" alt="Shipments" class="active" />
-    -->
+<main class="slider" aria-label="Изображение Shipments">
+  <div class="slide">
+    <img src="https://raw.githubusercontent.com/dperyaki/oneroof/main/images/tabPage8_image.png" alt="Shipments">
   </div>
+</main>
 
-  <script>
-    // Автообновление каждые 5 минут для единообразия с другими страницами
-    function refreshPage() { window.location.reload(); }
-    setTimeout(refreshPage, 300000);
-  </script>
+<script>
+  setTimeout(() => location.reload(), 300000);
+</script>
 </body>
 </html>
